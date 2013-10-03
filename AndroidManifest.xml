@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-      package="com.tinkerlog.android.pongtime"
-      android:versionCode="2"
-      android:versionName="1.01">
+      package="com.voilaweb.mobile.tinkerlog.pongtime"
+      android:versionCode="1"
+      android:versionName="1.00">
     <application 
         android:icon="@drawable/pong_64"
         android:theme="@android:style/Theme.NoTitleBar" 
@@ -18,6 +18,11 @@
         </activity>
 
     </application>
+
+    <!-- Do NOT change this. Since targetVersion is left unspecified,
+         Android will not use an XXHDPI phone's resolution, and that's
+         actually something good so that the paddles, ball etc
+         do not end up looking microscopic -->
     <uses-sdk android:minSdkVersion="3" />
 
 </manifest> 

@@ -1,4 +1,4 @@
-package com.tinkerlog.android.pongtime;
+package com.voilaweb.mobile.tinkerlog.pongtime;
 
 import java.util.Date;
 
@@ -259,13 +259,15 @@ public class PongTimeView extends SurfaceView implements SurfaceHolder.Callback 
         }
                 
         private void doDraw(Canvas canvas) {
-        	canvas.drawColor(Color.BLACK);
-        	if (showFPS) {
-        		canvas.drawText("FPS:" + currentFPS, 10, 25, textPaint);
-        	}
-        	drawBall(canvas);
-        	drawFieldAndPanels(canvas);
-           	drawTime(canvas, currentHours, currentMinutes);
+            if(canvas != null) {
+                canvas.drawColor(Color.BLACK);
+                if (showFPS) {
+                    canvas.drawText("FPS:" + currentFPS, 10, 25, textPaint);
+                }
+                drawBall(canvas);
+                drawFieldAndPanels(canvas);
+                drawTime(canvas, currentHours, currentMinutes);
+            }
         }
         
         private void drawBall(Canvas canvas) {

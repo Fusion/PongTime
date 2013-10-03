@@ -1,18 +1,17 @@
-package com.tinkerlog.android.pongtime;
+package com.voilaweb.mobile.tinkerlog.pongtime;
 
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
 import android.view.WindowManager;
-
-import com.tinkerlog.android.pongtime.R;
-import com.tinkerlog.android.pongtime.PongTimeView.PongThread;
 
 /**
  * Entry point for PongTime.
@@ -24,7 +23,7 @@ public class PongTime extends Activity {
 	private static final int MENU_ABOUT = 2;
 	private static final int DIALOG_ABOUT = 3;
 	
-    private PongThread pongThread;
+    private com.voilaweb.mobile.tinkerlog.pongtime.PongTimeView.PongThread pongThread;
     private PongTimeView pongView;
         
     @Override
@@ -51,10 +50,11 @@ public class PongTime extends Activity {
     @Override
     protected Dialog onCreateDialog(int id) {
     	if (id == DIALOG_ABOUT) {
+            String version = getAppVersion();
     		return new AlertDialog.Builder(this)
     		.setIcon(R.drawable.pong_128)
     		.setTitle(R.string.about_title)
-    		.setMessage(R.string.about_text)
+    		.setMessage(getResources().getString(R.string.about_text).replaceAll("//version//", version))
     		.setPositiveButton("OK", new DialogInterface.OnClickListener() {
     			public void onClick(DialogInterface dialog, int whichButton) {
     			}
@@ -79,6 +79,15 @@ public class PongTime extends Activity {
 
         pongView = (PongTimeView)findViewById(R.id.pongview);
         pongThread = pongView.getThread();
+    }
+
+    private String getAppVersion() {
+        String version = "?";
+        try {
+            PackageInfo info = getPackageManager().getPackageInfo(getPackageName(), 0);
+            version = info.versionName;
+        } catch (PackageManager.NameNotFoundException e) {}
+        return version;
     }
 }
 
